@@ -1,21 +1,28 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState } from 'react';
+import { baseContext } from './contexts/baseContext';
+//import 'react-native-gesture-handler';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import Welcome from './components/Welcome';
+import Menu from './components/Menu';
+
+const Stack = createStackNavigator();
 
 export default function App() {
+  const [base, setBase] = useState('Binary');
+
+  function changeBase(base) {
+    setBase(base);
+  }
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+    <baseContext.Provider value={{ changeBase, base }}>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="Welcome" screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="Welcome" component={Welcome} />
+          <Stack.Screen name="Menu" component={Menu} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </baseContext.Provider>
+  )
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
