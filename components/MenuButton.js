@@ -17,7 +17,7 @@ export default function MenuButton({ base }) {
 const styles = StyleSheet.create({
     button: {
         backgroundColor: colors.primary,
-        width: 200,
+        width: 250,
         borderColor: colors.light,
         borderRadius: 10,
         borderWidth: 3,

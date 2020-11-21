@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { baseContext } from './contexts/baseContext';
-//import 'react-native-gesture-handler';
+import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Welcome from './components/Welcome';
 import Menu from './components/Menu';
+import Calculator from './components/Calculator';
 
 const Stack = createStackNavigator();
 
@@ -20,6 +21,7 @@ export default function App() {
         <Stack.Navigator initialRouteName="Welcome" screenOptions={{ headerShown: false }}>
           <Stack.Screen name="Welcome" component={Welcome} />
           <Stack.Screen name="Menu" component={Menu} />
+          <Stack.Screen name="Calculator" component={Calculator} />
         </Stack.Navigator>
       </NavigationContainer>
     </baseContext.Provider>

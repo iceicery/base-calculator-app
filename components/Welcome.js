@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#666666',
         borderWidth: 1,
         padding: 20,
-        borderRadius: '10%',
+        borderRadius: 10,
         borderColor: colors.light,
     },
     logo: {
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
         marginBottom: 20,
         width: 200,
         height: 200,
-        borderRadius: '50%',
+        borderRadius: 10,
         resizeMode: 'center',
     },
     text: {
