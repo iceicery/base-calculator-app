@@ -3,40 +3,35 @@ import { SafeAreaView, View, Text, StyleSheet, TouchableOpacity, RecyclerViewBac
 import colors from '../config/colors';
 import { baseContext } from '../contexts/baseContext';
 import Number from './Number';
-let numberString = "";
-let result = 0;
-let eqlString = "";
-let number = 0;
+
 export default function Calculator() {
     const baseData = useContext(baseContext);
     let numberAry = [];
     for (let i = 0; i < baseData.base; i++) {
         numberAry.push(i);
     }
-    numberString = numberString + baseData.number;
-    eqlString = eqlString + baseData.number;
-
+    let ns = baseData.numberStr;
     function add() {
-        number += parseInt(numberString, baseData.base);
-        console.log(unm)
-        result = result + number;
-        numberString = '';
-        eqlString = eqlString + '+';
-        console.log(eqlString);
+        console.log(ns);
+        console.log(baseData.base);
+        let n = parseInt(ns, baseData.base);
+        console.log(n);
+        baseData.changeResult(baseData.result + n);
+        baseData.changeNumberStr('');
+        baseData.changeEquStr(baseData.equStr + '+');
     }
     function getResult() {
-        result = result + number;
-        numberString = '';
-        eqlString = eqlString + '=';
-        console.log(eqlString);
+        baseData.changeResult(baseData.result + baseData.n);
+        baseData.changeNumberStr('');
+        baseData.changeEquStr(baseData.equStr + '=');
     }
     return (
         <SafeAreaView style={styles.body}>
             <View style={styles.container}>
                 <Text style={styles.title}>Base: {baseData.base}</Text>
                 <View style={styles.result}>
-                    <Text style={styles.title}>{eqlString}</Text>
-                    <Text style={styles.title}>{result}</Text>
+                    <Text style={styles.title}>{baseData.equStr}</Text>
+                    <Text style={styles.title}>{baseData.result}</Text>
                 </View>
                 <View style={styles.numberContainer}>
                     {numberAry.map((item, i) => {

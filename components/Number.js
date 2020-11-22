@@ -6,6 +6,8 @@ export default function Number({ number }) {
     const baseData = useContext(baseContext);
     function onPress() {
         baseData.changeNumber(number);
+        baseData.changeNumberStr(baseData.numberStr + number);
+        baseData.changeEquStr(baseData.equStr + number);
     }
     return (
         <TouchableOpacity style={styles.button} onPress={onPress}><Text style={styles.text}>{number}</Text></TouchableOpacity>
