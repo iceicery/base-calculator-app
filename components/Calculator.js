@@ -1,28 +1,56 @@
 import React, { useContext } from 'react';
-import { SafeAreaView, View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { SafeAreaView, View, Text, StyleSheet, TouchableOpacity, RecyclerViewBackedScrollView } from 'react-native';
 import colors from '../config/colors';
 import { baseContext } from '../contexts/baseContext';
+import Number from './Number';
+let numberString = "";
+let result = 0;
+let eqlString = "";
+let number = 0;
 export default function Calculator() {
     const baseData = useContext(baseContext);
+    let numberAry = [];
+    for (let i = 0; i < baseData.base; i++) {
+        numberAry.push(i);
+    }
+    numberString = numberString + baseData.number;
+    eqlString = eqlString + baseData.number;
+
+    function add() {
+        number += parseInt(numberString, baseData.base);
+        console.log(unm)
+        result = result + number;
+        numberString = '';
+        eqlString = eqlString + '+';
+        console.log(eqlString);
+    }
+    function getResult() {
+        result = result + number;
+        numberString = '';
+        eqlString = eqlString + '=';
+        console.log(eqlString);
+    }
     return (
         <SafeAreaView style={styles.body}>
             <View style={styles.container}>
                 <Text style={styles.title}>Base: {baseData.base}</Text>
                 <View style={styles.result}>
-                    <Text style={styles.title}>Equation</Text>
-                    <Text style={styles.title}>Result</Text>
+                    <Text style={styles.title}>{eqlString}</Text>
+                    <Text style={styles.title}>{result}</Text>
                 </View>
                 <View style={styles.numberContainer}>
-
+                    {numberAry.map((item, i) => {
+                        return <Number number={item} key={i} />
+                    })}
                 </View>
                 <View style={styles.operatorContainer}>
-                    <TouchableOpacity style={styles.operator}><Text style={styles.title}>+</Text></TouchableOpacity>
+                    <TouchableOpacity style={styles.operator} onPress={add}><Text style={styles.title}>+</Text></TouchableOpacity>
                     <TouchableOpacity style={styles.operator}><Text style={styles.title}>-</Text></TouchableOpacity>
                     <TouchableOpacity style={styles.operator}><Text style={styles.title}>x</Text></TouchableOpacity>
                     <TouchableOpacity style={styles.operator}><Text style={styles.title}>/</Text></TouchableOpacity>
                 </View>
                 <View style={styles.eqlClrContainer}>
-                    <TouchableOpacity style={styles.eqlClr}><Text style={styles.title}>Eql</Text></TouchableOpacity>
+                    <TouchableOpacity style={styles.eqlClr} onPress={getResult}><Text style={styles.title}>Eql</Text></TouchableOpacity>
                     <TouchableOpacity style={styles.eqlClr}><Text style={styles.title}>Clr</Text></TouchableOpacity>
                 </View>
             </View>
@@ -37,7 +65,6 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     container: {
-        flex: 1,
         margin: 20,
         padding: 10,
         borderWidth: 3,
@@ -59,8 +86,9 @@ const styles = StyleSheet.create({
     numberContainer: {
         width: '100%',
         marginTop: 10,
-        flexDirection: 'column',
-        justifyContent: 'space-between',
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        justifyContent: 'flex-start',
     },
     operatorContainer: {
         width: '100%',

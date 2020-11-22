@@ -11,12 +11,17 @@ const Stack = createStackNavigator();
 
 export default function App() {
   const [base, setBase] = useState('Binary');
+  const [number, setNumber] = useState('');
 
   function changeBase(base) {
     setBase(base);
   }
+
+  function changeNumber(number) {
+    setNumber(number);
+  }
   return (
-    <baseContext.Provider value={{ changeBase, base }}>
+    <baseContext.Provider value={{ changeBase, changeNumber, base, number }}>
       <NavigationContainer>
         <Stack.Navigator initialRouteName="Welcome" screenOptions={{ headerShown: false }}>
           <Stack.Screen name="Welcome" component={Welcome} />

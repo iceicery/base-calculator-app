@@ -8,13 +8,8 @@ import { useNavigation } from '@react-navigation/native';
 export default function Menu() {
     const baseData = useContext(baseContext);
     const navigation = useNavigation();
-    const bases = ['Binary', 'Octal', 'Decimal', 'Hexadecimal'];
-    const baseNumber = {
-        'Binary': 1,
-        'Octal': 8,
-        'Decimal': 10,
-        'Hexadecimal': 16,
-    };
+    const bases = [2, 8, 10, 16];
+
     function toCalculator() {
         navigation.navigate('Calculator');
     }
@@ -32,7 +27,7 @@ export default function Menu() {
                 }}
                 defaultValue={baseData.base}
             />
-            <TouchableOpacity onPress={toCalculator} style={styles.button}><Text style={styles.buttonText}>Go To The Calculator</Text></TouchableOpacity>
+            <TouchableOpacity onPress={toCalculator} style={styles.button}><Text style={styles.buttonText}>Confirm</Text></TouchableOpacity>
             <Text style={{ color: '#fff' }}>{baseData.base}</Text>
         </SafeAreaView>
     )
@@ -65,7 +60,9 @@ const styles = StyleSheet.create({
         backgroundColor: colors.primary,
     },
     buttonText: {
+        fontSize: 30,
         color: colors.light,
+        textAlign: 'center',
     }
 
 })
