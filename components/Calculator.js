@@ -21,60 +21,54 @@ export default function Calculator() {
         if (baseData.operator === '-') {
             return a - b;
         }
-        if (baseData.operate === '*') {
+        if (baseData.operator === '*') {
             return a * b;
         }
-        if (baseData.operate === '/') {
+        if (baseData.operator === '/') {
             return a / b;
         }
     }
 
-    function add() {
+    function commonOperate(op) {
         let n = parseInt(ns, baseData.base);
         if (baseData.operator === '') {
             baseData.changeResult(n);
         } else {
-            console.log(baseData.result);
-            console.log(n);
-            console.log(baseData.operator);
             let res = operate(baseData.result, n)
             baseData.changeResult(res);
         }
         baseData.changeNumberStr('');
-        baseData.changeOperator('+');
-        baseData.changeEquStr(baseData.equStr + '+');
         baseData.disableButton(true);
+        baseData.changeOperator(op);
+        baseData.changeEquStr(baseData.equStr + op);
     }
-    /* have problems of operator. first sould get the number and then operate with the following number
-    function subtract() {
-        let n = parseInt(ns, baseData.base);
-        baseData.changeResult(baseData.result - n);
-        baseData.changeNumberStr('');
-        baseData.changeEquStr(baseData.equStr + '-');
-        baseData.disableButton(true);
+
+    function add() {
+        commonOperate('+');
     }
+    function substract() {
+        commonOperate('-');
+    }
+
     function multiply() {
-        let n = parseInt(ns, baseData.base);
-        baseData.changeResult(baseData.result * n);
-        console.log(baseData.result);
-        baseData.changeNumberStr('');
-        baseData.changeEquStr(baseData.equStr + '*');
-        baseData.disableButton(true);
+        commonOperate('*');
     }
     function divid() {
-        let n = parseInt(ns, baseData.base);
-        baseData.changeResult(baseData.result / n);
-        baseData.changeNumberStr('');
-        baseData.changeEquStr(baseData.equStr + '/');
-        baseData.disableButton(true);
+        commonOperate('/')
     }
-    */
+
     function getResult() {
         let n = parseInt(ns, baseData.base);
-        baseData.changeResult(baseData.result + n);
+        if (baseData.operator === '') {
+            baseData.changeResult(n);
+        } else {
+            let res = operate(baseData.result, n)
+            baseData.changeResult(res);
+        }
         baseData.changeNumberStr('');
-        baseData.changeEquStr(baseData.equStr + '=');
         baseData.disableButton(true);
+        baseData.changeOperator('');
+        baseData.changeEquStr(baseData.equStr + '=');
         baseData.disableNumberButton(true);
     }
     function clear() {
@@ -99,9 +93,9 @@ export default function Calculator() {
                 </View>
                 <View style={styles.operatorContainer}>
                     <TouchableOpacity style={styles.operator} onPress={add} disabled={baseData.disable}><Text style={styles.title}>+</Text></TouchableOpacity>
-                    <TouchableOpacity style={styles.operator} onPress={add} disabled={baseData.disable}><Text style={styles.title}>-</Text></TouchableOpacity>
-                    <TouchableOpacity style={styles.operator} onPress={add} disabled={baseData.disable}><Text style={styles.title}>x</Text></TouchableOpacity>
-                    <TouchableOpacity style={styles.operator} onPress={add} disabled={baseData.disable}><Text style={styles.title}>/</Text></TouchableOpacity>
+                    <TouchableOpacity style={styles.operator} onPress={substract} disabled={baseData.disable}><Text style={styles.title}>-</Text></TouchableOpacity>
+                    <TouchableOpacity style={styles.operator} onPress={multiply} disabled={baseData.disable}><Text style={styles.title}>x</Text></TouchableOpacity>
+                    <TouchableOpacity style={styles.operator} onPress={divid} disabled={baseData.disable}><Text style={styles.title}>/</Text></TouchableOpacity>
                 </View>
                 <View style={styles.eqlClrContainer}>
                     <TouchableOpacity style={styles.eqlClr} onPress={getResult} disabled={baseData.disable}><Text style={styles.title}>=</Text></TouchableOpacity>
