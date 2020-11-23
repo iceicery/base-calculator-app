@@ -8,9 +8,10 @@ export default function Number({ number }) {
         baseData.changeNumber(number);
         baseData.changeNumberStr(baseData.numberStr + number);
         baseData.changeEquStr(baseData.equStr + number);
+        baseData.disableButton(false);
     }
     return (
-        <TouchableOpacity style={styles.button} onPress={onPress}><Text style={styles.text}>{number}</Text></TouchableOpacity>
+        <TouchableOpacity style={styles.button} onPress={onPress} disabled={baseData.numberDisable}><Text style={styles.text}>{number}</Text></TouchableOpacity>
     )
 }
 

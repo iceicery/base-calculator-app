@@ -16,6 +16,9 @@ export default function App() {
   const [equStr, setEquStr] = useState('');
   const [n, setN] = useState(0);
   const [result, setResult] = useState(0);
+  const [operator, setOperator] = useState('');
+  const [disable, setDisable] = useState(true);
+  const [numberDisable, setNumberDisable] = useState(false);
 
   function changeBase(base) {
     setBase(base);
@@ -41,8 +44,18 @@ export default function App() {
     setResult(n);
   }
 
+  function disableButton(yn) {
+    setDisable(yn);
+  }
+
+  function disableNumberButton(yn) {
+    setNumberDisable(yn);
+  }
+  function changeOperator(op) {
+    setOperator(op);
+  }
   return (
-    <baseContext.Provider value={{ changeBase, changeNumber, changeNumberStr, changeEquStr, changeN, changeResult, base, number, numberStr, equStr, n, result }}>
+    <baseContext.Provider value={{ changeBase, changeNumber, changeNumberStr, changeEquStr, changeN, changeResult, disableButton, disableNumberButton, changeOperator, base, number, numberStr, equStr, n, result, disable, numberDisable, operator }}>
       <NavigationContainer>
         <Stack.Navigator initialRouteName="Welcome" screenOptions={{ headerShown: false }}>
           <Stack.Screen name="Welcome" component={Welcome} />
